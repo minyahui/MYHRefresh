@@ -50,14 +50,5 @@ var MYHRefreshHeaderKey: String = "0"
 var MYHRefreshFooterKey: String = "1"
 var MYHRefreshReloadDataBlockKey: String = "3"
 
-/// light模式
-var MYH_isLight: Bool {
-    get {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle == .light
-        }
-        return true
-    }
-}
 
 

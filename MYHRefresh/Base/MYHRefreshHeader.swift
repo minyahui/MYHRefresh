@@ -59,12 +59,12 @@ open class MYHRefreshHeader: MYHRefreshComponent {
         }
     }
     
-    convenience init(target: AnyObject, refreshingAction: Selector) {
+    public convenience init(target: AnyObject, refreshingAction: Selector) {
         self.init()
         self.setRefreshing(target: target, refreshingAction: refreshingAction)
     }
     
-    convenience init(refreshingBlock: (()->())?) {
+    public convenience init(refreshingBlock: (()->())?) {
         self.init()
         self.refreshingBlock = refreshingBlock
     }

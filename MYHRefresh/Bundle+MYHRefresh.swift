@@ -65,13 +65,23 @@ extension Bundle {
         var imageName: String = arrowType.rawValue
         switch arrowType {
         case .black:
-            if MYH_isLight == false {
-                imageName = "MYH_arrow_white@2x"
+            if #available(iOS 13.0, *) {
+               _ = UIColor.init { (trait) -> UIColor in
+                    if trait.userInterfaceStyle != .light {
+                        imageName = "MYH_arrow_white@2x"
+                    }
+                    return UIColor.black
+                }
             }
             break
         case .white:
-            if MYH_isLight  == false {
-                imageName = "MYH_arrow_black@2x"
+            if #available(iOS 13.0, *) {
+               _ = UIColor.init { (trait) -> UIColor in
+                    if trait.userInterfaceStyle != .light {
+                        imageName = "MYH_arrow_black@2x"
+                    }
+                    return UIColor.black
+                }
             }
             break
         }

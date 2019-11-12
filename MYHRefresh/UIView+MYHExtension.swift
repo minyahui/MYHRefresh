@@ -96,7 +96,7 @@ extension UIView {
 }
 
 extension UILabel {
-    static func myh_init() -> UILabel {
+    public static func myh_init() -> UILabel {
         let label = UILabel.init()
         label.font = MYHRefreshLabelFont
         label.textColor = UIColor.myh_black
@@ -106,7 +106,7 @@ extension UILabel {
         return label
     }
     
-    func myh_textWidth() -> CGFloat {
+    open func myh_textWidth() -> CGFloat {
         var stringWidth: CGFloat = 0
         let size = CGSize.init(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT))
         if let str = self.text, str.count > 0, let f = self.font {
@@ -118,21 +118,35 @@ extension UILabel {
 }
 
 extension UIColor {
-    class var myh_black: UIColor {
+    open class var myh_black: UIColor {
         get {
-            if MYH_isLight {
-                return UIColor.black
+            var color = UIColor.black
+            if #available(iOS 13.0, *) {
+               color = UIColor.init { (trait) -> UIColor in
+                    if trait.userInterfaceStyle != .light {
+                        return UIColor.white
+                    } else {
+                        return UIColor.black
+                    }
+                }
             }
-            return UIColor.white
+            return color
         }
     }
 
-    class var myh_white: UIColor {
+    open class var myh_white: UIColor {
         get {
-            if MYH_isLight {
-                return UIColor.white
+            var color = UIColor.white
+            if #available(iOS 13.0, *) {
+               color = UIColor.init { (trait) -> UIColor in
+                    if trait.userInterfaceStyle != .light {
+                        return UIColor.black
+                    } else {
+                        return UIColor.white
+                    }
+                }
             }
-            return UIColor.black
+            return color
         }
     }
 
