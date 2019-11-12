@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class MYHRefreshAutoFooter: MYHRefreshFooter {
+open class MYHRefreshAutoFooter: MYHRefreshFooter {
     /// 当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新)
-    public var triggerAutomaticallyRefreshPercent: CGFloat = 1
+    open var triggerAutomaticallyRefreshPercent: CGFloat = 1
     /// 是否每一次拖拽只发一次请求
-    public var isOnlyRefreshPerDrag: Bool = false
+    open var isOnlyRefreshPerDrag: Bool = false
     /// 是否自动刷新(默认为true)
-    public var isAutomaticallyRefresh: Bool = true
+    open var isAutomaticallyRefresh: Bool = true
     
     /// 一个新的拖拽
     private var isOneNewPan: Bool = false
-    override public func willMove(toSuperview newSuperview: UIView?) {
+    override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if newSuperview != nil {
             if self.scrollView != nil {
@@ -36,21 +36,21 @@ public class MYHRefreshAutoFooter: MYHRefreshFooter {
         }
     }
     
-    override public func prepare() {
+    override open func prepare() {
         super.prepare()
         self.triggerAutomaticallyRefreshPercent = 1
         self.isAutomaticallyChangeAlpha = false
         self.isAutomaticallyRefresh = true
     }
     
-    override public func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentSizeDid: change)
         if self.scrollView != nil {
             self.myh_y = self.scrollView!.myh_content_height + self.ignoredScrollViewContentInsetBottom
         }
     }
     
-    override public func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentOffsetDid: change)
         if self.state != .idle || self.isAutomaticallyRefresh == false || self.myh_y == 0 {
             return
@@ -72,7 +72,7 @@ public class MYHRefreshAutoFooter: MYHRefreshFooter {
     }
     
     
-    override public func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(panStateDid: change)
         if self.state != .idle {
             return
@@ -104,18 +104,18 @@ public class MYHRefreshAutoFooter: MYHRefreshFooter {
     }
     
     /// 在触发开始刷新前的刷新忽略逻辑, 默认由 isOnlyRefreshPerDrag 和 新手势决定, 用于特殊控制逻辑, 如果不清楚机制, 请勿使用
-    public func ignoreRefreshAction() -> Bool {
+    open func ignoreRefreshAction() -> Bool {
         return !self.isOneNewPan && self.isOnlyRefreshPerDrag
     }
     
-    override public func beginRefreshing() {
+    override open func beginRefreshing() {
         if self.ignoreRefreshAction() {
             return
         }
         super.beginRefreshing()
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             if newValue == self.state {
                 return
@@ -132,7 +132,7 @@ public class MYHRefreshAutoFooter: MYHRefreshFooter {
         }
     }
     
-    override public var isHidden: Bool {
+    override open var isHidden: Bool {
         willSet{
             let lastHidden = self.isHidden
             super.isHidden = newValue

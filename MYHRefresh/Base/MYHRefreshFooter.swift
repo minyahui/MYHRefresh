@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MYHRefreshFooter: MYHRefreshComponent {
+open class MYHRefreshFooter: MYHRefreshComponent {
     /// 忽略多少scrollView的contentInset的bottom
-    public var ignoredScrollViewContentInsetBottom: CGFloat = 0
+    open var ignoredScrollViewContentInsetBottom: CGFloat = 0
     
     private var insetTDelta: CGFloat = 0
     
@@ -26,7 +26,7 @@ public class MYHRefreshFooter: MYHRefreshComponent {
         self.refreshingBlock = refreshingBlock
     }
     
-    override public func prepare() {
+    override open func prepare() {
         super.prepare()
         self.myh_h = MYHRefreshFooterHeight
     }
@@ -40,14 +40,14 @@ public class MYHRefreshFooter: MYHRefreshComponent {
     }
     
     /// 提示没有更多的数据
-    public func endRefreshingWithNoMoreData() {
+    open func endRefreshingWithNoMoreData() {
         DispatchQueue.main.async { [weak self]() in
             self?.state = .noMoreData
         }
     }
     
     /// 重置没有更多的数据（消除没有更多数据的状态）
-    public func resetNoMoreData() {
+    open func resetNoMoreData() {
         DispatchQueue.main.async {[weak self]() in
             self?.state = .idle
         }

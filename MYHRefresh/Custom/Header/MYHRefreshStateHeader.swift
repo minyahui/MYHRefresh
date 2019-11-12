@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class MYHRefreshStateHeader: MYHRefreshHeader {
+open class MYHRefreshStateHeader: MYHRefreshHeader {
     // MARK: 刷新时间相关
     /// 显示上一次刷新时间的label
-    public weak var lastUpdatedTimeLabel: UILabel! {
+    open weak var lastUpdatedTimeLabel: UILabel! {
         if self.privateLastUpdatedTimeLabel == nil {
             let label = UILabel.myh_init()
             self.addSubview(label)
@@ -21,11 +21,11 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     private weak var privateLastUpdatedTimeLabel: UILabel?
     /// 利用这个block来决定显示的更新时间文字 -- 优先显示这个时间，没有就取本地存储的时间
-    public var lastUpdatedTimeText: ((Date)->(String))?
+    open var lastUpdatedTimeText: ((Date)->(String))?
     
     // MARK: 状态相关
     /// 显示刷新状态的label
-    public weak var stateLabel: UILabel! {
+    open weak var stateLabel: UILabel! {
         if self.privateStateLabel == nil {
             let label = UILabel.myh_init()
             self.addSubview(label)
@@ -35,7 +35,7 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     private weak var privateStateLabel: UILabel?
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet{
             // 设置状态文字
             self.stateLabel.text = self.stateTitles[newValue]
@@ -50,7 +50,7 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     
     /// 设置箭头的样式
-    public var arrowType: MYHRefreshComponent.ArrowType = .black {
+    open var arrowType: MYHRefreshComponent.ArrowType = .black {
         willSet{
             switch newValue {
             case .black:
@@ -65,12 +65,12 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
         }
     }
     /// 文字距离圈圈、箭头的距离
-    public var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
+    open var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
     
     /// 所有状态对应的文字
     private var stateTitles: [MYHRefreshComponent.RefreshState:String] = [MYHRefreshComponent.RefreshState:String]()
     
-    override public var lastUpdatedTimeKey: String {
+    override open var lastUpdatedTimeKey: String {
         didSet{
             self.refreshTime()
         }
@@ -89,7 +89,7 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     
     // MARK: 重写父类的方法
-    override public func prepare() {
+    override open func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -98,7 +98,7 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
         self.setTitle(Bundle.myh_localizedString(key: MYHRefreshHeaderIdleText), state: .idle)
         super.prepare()
     }
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.isHidden == true {
             return
@@ -123,7 +123,7 @@ public class MYHRefreshStateHeader: MYHRefreshHeader {
     /// 设置状态对应的标题
     /// - Parameter title: 标题
     /// - Parameter state: 状态
-    public func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
+    open func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
         guard let t = title else { return }
         self.stateTitles[state] = t
         self.stateLabel.text = self.stateTitles[state]

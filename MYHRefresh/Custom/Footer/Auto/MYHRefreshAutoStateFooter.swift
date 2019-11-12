@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
+open class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     /// 设置箭头的样式
-    public var arrowType: MYHRefreshComponent.ArrowType = .black {
+    open var arrowType: MYHRefreshComponent.ArrowType = .black {
         willSet{
             switch newValue {
             case .black:
@@ -23,10 +23,10 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
         }
     }
     /// 文字距离圈圈、箭头的距离
-    public var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
+    open var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
     
     /// 隐藏刷新状态的文字
-    public var isRefreshingTitleHidden: Bool = false
+    open var isRefreshingTitleHidden: Bool = false
     
     
     /// 所有状态对应的文字
@@ -35,7 +35,7 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     private var labelIsTrigger: Bool = false
     // MARK: 状态相关
     /// 显示刷新状态的label
-    public weak var stateLabel: UILabel! {
+    open weak var stateLabel: UILabel! {
         if self.privateStateLabel == nil {
             let label = UILabel.myh_init()
             self.addSubview(label)
@@ -58,11 +58,11 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     private weak var privateStateButton: UIButton?
     
     
-    override public func ignoreRefreshAction() -> Bool {
+    override open func ignoreRefreshAction() -> Bool {
         return !self.labelIsTrigger && super.ignoreRefreshAction()
     }
     
-    override public func prepare() {
+    override open func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -77,7 +77,7 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
         super.prepare()
     }
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.constraints.count > 0 {
             return
@@ -98,7 +98,7 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
        self.arrowType = arrowType
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.isRefreshingTitleHidden, newValue == .refreshing {
                 self.stateLabel.text = ""
@@ -115,7 +115,7 @@ public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     /// 设置状态对应的标题
     /// - Parameter title: 标题
     /// - Parameter state: 状态
-    public func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
+    open func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
         guard let t = title else { return }
         self.stateTitles[state] = t
         self.stateLabel.text = self.stateTitles[state]

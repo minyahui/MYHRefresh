@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
+open class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     
     /// 设置箭头的样式
-    public var arrowType: MYHRefreshComponent.ArrowType = .black {
+    open var arrowType: MYHRefreshComponent.ArrowType = .black {
         willSet{
             switch newValue {
             case .black:
@@ -25,14 +25,14 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     }
     
     /// 文字距离圈圈、箭头的距离
-    public var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
+    open var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
         
     /// 所有状态对应的文字
     private var stateTitles: [MYHRefreshComponent.RefreshState:String] = [MYHRefreshComponent.RefreshState:String]()
 
     // MARK: 状态相关
     /// 显示刷新状态的label
-    public weak var stateLabel: UILabel! {
+    open weak var stateLabel: UILabel! {
         if self.privateStateLabel == nil {
             let label = UILabel.myh_init()
             self.addSubview(label)
@@ -43,7 +43,7 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     private weak var privateStateLabel: UILabel?
     
     
-    override public func prepare() {
+    override open func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -68,7 +68,7 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
        self.arrowType = arrowType
     }
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.constraints.count > 0 {
             return
@@ -76,7 +76,7 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
         self.stateLabel.frame = self.bounds
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             self.stateLabel.text = self.stateTitles[newValue]
             if self.state == newValue {
@@ -90,7 +90,7 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     /// 设置状态对应的标题
     /// - Parameter title: 标题
     /// - Parameter state: 状态
-    public func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
+    open func setTitle(_ title: String?, state: MYHRefreshComponent.RefreshState) {
         guard let t = title else { return }
         self.stateTitles[state] = t
         self.stateLabel.text = self.stateTitles[state]
@@ -98,7 +98,7 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     
     /// 获取state状态下的title
     /// - Parameter state: 状态
-    public func title(for state: MYHRefreshComponent.RefreshState) -> String? {
+    open func title(for state: MYHRefreshComponent.RefreshState) -> String? {
         return self.stateTitles[state]
     }
     

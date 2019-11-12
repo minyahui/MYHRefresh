@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
+open class MYHRefreshNormalHeader: MYHRefreshStateHeader {
     
-    public weak var arrowImageView: UIImageView! {
+    open weak var arrowImageView: UIImageView! {
         if self.privateArrowImageView == nil {
             let imageView = UIImageView.init(image: Bundle.myh_arrowImage(arrowType: self.arrowType))
             self.addSubview(imageView)
@@ -20,7 +20,7 @@ public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
     }
     private weak var privateArrowImageView: UIImageView?
     
-    public weak var loadingView: UIActivityIndicatorView! {
+    open weak var loadingView: UIActivityIndicatorView! {
         get {
             if self.privateLoadingView == nil {
                 let loadingView = UIActivityIndicatorView.init(style: self.activityIndicatorViewStyle)
@@ -34,7 +34,7 @@ public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
     }
     private weak var privateLoadingView: UIActivityIndicatorView?
     
-    override public var arrowType: MYHRefreshComponent.ArrowType{
+    override open var arrowType: MYHRefreshComponent.ArrowType{
         willSet{
             super.arrowType = newValue
             self.arrowImageView.image = Bundle.myh_arrowImage(arrowType: newValue)
@@ -51,14 +51,14 @@ public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
         }
     }
     
-    public var activityIndicatorViewStyle: UIActivityIndicatorView.Style = .gray {
+    open var activityIndicatorViewStyle: UIActivityIndicatorView.Style = .gray {
         didSet{
             self.loadingView.style = self.activityIndicatorViewStyle
             self.setNeedsLayout()
         }
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.state == newValue {
                 return
@@ -101,7 +101,7 @@ public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
         }
     }
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         // 箭头的中心点
         var arrowCenterX = self.myh_w * 0.5
@@ -129,7 +129,7 @@ public class MYHRefreshNormalHeader: MYHRefreshStateHeader {
         self.arrowImageView.tintColor = self.stateLabel.textColor
     }
     
-    override public func prepare() {
+    override open func prepare() {
         
         if #available(iOS 13.0, *) {
             self.activityIndicatorViewStyle = .medium

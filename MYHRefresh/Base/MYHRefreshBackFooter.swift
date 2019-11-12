@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MYHRefreshBackFooter: MYHRefreshFooter {
+open class MYHRefreshBackFooter: MYHRefreshFooter {
 
     private var lastBottomDelta: CGFloat = 0
     private var lastRefreshCount: Int = 0

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIScrollView {
-    public var myh_inset: UIEdgeInsets {
+    open var myh_inset: UIEdgeInsets {
         get{
             if #available(iOS 11.0, *) {
                 return self.adjustedContentInset
@@ -18,7 +18,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_inset_top: CGFloat {
+    open var myh_inset_top: CGFloat {
         get {
             return self.myh_inset.top
         }
@@ -32,7 +32,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_inset_bottom: CGFloat {
+    open var myh_inset_bottom: CGFloat {
         get {
             return self.myh_inset.bottom
         }
@@ -46,7 +46,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_inset_left: CGFloat {
+    open var myh_inset_left: CGFloat {
         get {
             return self.myh_inset.left
         }
@@ -60,7 +60,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_inset_right: CGFloat {
+    open var myh_inset_right: CGFloat {
         get {
             return self.myh_inset.right
         }
@@ -74,7 +74,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_offset_x: CGFloat {
+    open var myh_offset_x: CGFloat {
         get {
             return self.contentOffset.x
         }
@@ -85,7 +85,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_offset_y: CGFloat {
+    open var myh_offset_y: CGFloat {
         get {
             return self.contentOffset.y
         }
@@ -96,7 +96,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_content_width: CGFloat {
+    open var myh_content_width: CGFloat {
         get {
             return self.contentSize.width
         }
@@ -107,7 +107,7 @@ extension UIScrollView {
         }
     }
     
-    public var myh_content_height: CGFloat {
+    open var myh_content_height: CGFloat {
         get {
             return self.contentSize.height
         }

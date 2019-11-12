@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
+open class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
 
-    public weak var gifImageView: UIImageView! {
+    open weak var gifImageView: UIImageView! {
         if self.privateGifImageView == nil {
             let imageView = UIImageView()
             self.addSubview(imageView)
@@ -25,7 +25,7 @@ public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
     /// 所有状态对应的动画时间
     private var stateDurations: [MYHRefreshComponent.RefreshState:TimeInterval]? = [MYHRefreshComponent.RefreshState:TimeInterval]()
     
-    override public var pullingPercent: CGFloat {
+    override open var pullingPercent: CGFloat {
         willSet{
             super.pullingPercent = newValue
             if self.state != .idle  {
@@ -43,7 +43,7 @@ public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
         }
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.state == newValue {
                 return
@@ -71,7 +71,7 @@ public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
     }
     
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.gifImageView.constraints.count > 0 {
             return
@@ -85,13 +85,13 @@ public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
         }
     }
     
-    override public func prepare() {
+    override open func prepare() {
         // 初始化间距
         self.labelLeftInset = 20
         super.prepare()
     }
     
-    public func setImages(images: [UIImage], duration: TimeInterval, state: MYHRefreshComponent.RefreshState) {
+    open func setImages(images: [UIImage], duration: TimeInterval, state: MYHRefreshComponent.RefreshState) {
         self.stateImages?[state] = images
         if duration <= 0 {
             self.stateDurations?[state] = 0.1
@@ -103,7 +103,7 @@ public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
         }
     }
     
-    public func setImages(images: [UIImage], state: MYHRefreshComponent.RefreshState) {
+    open func setImages(images: [UIImage], state: MYHRefreshComponent.RefreshState) {
         self.setImages(images: images, duration: Double(images.count) * 0.1, state: state)
     }
 }

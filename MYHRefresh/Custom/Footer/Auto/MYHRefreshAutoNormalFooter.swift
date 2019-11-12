@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
-    override public var arrowType: MYHRefreshComponent.ArrowType {
+open class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
+    override open var arrowType: MYHRefreshComponent.ArrowType {
         willSet {
             super.arrowType = newValue
             switch newValue {
@@ -24,7 +24,7 @@ public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
             }
         }
     }
-    public weak var loadingView: UIActivityIndicatorView! {
+    open weak var loadingView: UIActivityIndicatorView! {
         get {
             if self.privateLoadingView == nil {
                 let loadingView = UIActivityIndicatorView.init(style: self.activityIndicatorViewStyle)
@@ -38,14 +38,14 @@ public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
     }
     private weak var privateLoadingView: UIActivityIndicatorView?
     
-    public var activityIndicatorViewStyle: UIActivityIndicatorView.Style = .gray {
+    open var activityIndicatorViewStyle: UIActivityIndicatorView.Style = .gray {
         didSet{
             self.loadingView.style = self.activityIndicatorViewStyle
             self.setNeedsLayout()
         }
     }
 
-    override public func prepare() {
+    override open func prepare() {
         super.prepare()
         if #available(iOS 13.0, *) {
             self.activityIndicatorViewStyle = .medium
@@ -54,7 +54,7 @@ public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
         }
     }
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.loadingView.constraints.count > 0 {
             return
@@ -67,7 +67,7 @@ public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
         self.loadingView.center = CGPoint.init(x: loadingCenterX, y: loadingCenterY)
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet{
             if newValue == self.state {
                 return

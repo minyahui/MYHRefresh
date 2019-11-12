@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MYHRefreshComponent: UIView {
+open class MYHRefreshComponent: UIView {
     
     /// 下拉刷新箭头的样式，后面跟着的是图片的名称
     public enum ArrowType: String {
@@ -33,7 +33,7 @@ public class MYHRefreshComponent: UIView {
     }
     
     /// 刷新状态 一般交给子类内部实现
-    public var state: RefreshState = .none {
+    open var state: RefreshState = .none {
         didSet{
             /// 加入主队列的目的是等setState:方法调用完毕、设置完文字后再去布局子控件
             DispatchQueue.main.async {[weak self] () in
@@ -44,7 +44,7 @@ public class MYHRefreshComponent: UIView {
     
     // MARK: 交给子类去访问
     /// 父控件
-    public weak var scrollView: UIScrollView? {
+    open weak var scrollView: UIScrollView? {
         didSet {
             if #available(iOS 11.0, *) {
                 self.scrollView?.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
@@ -54,14 +54,14 @@ public class MYHRefreshComponent: UIView {
         }
     }
     /// 记录scrollView刚开始的inset
-    public var scrollViewOriginalInset: UIEdgeInsets?
+    open var scrollViewOriginalInset: UIEdgeInsets?
     
     // MARK: 刷新状态控制
     /// 开始刷新后的回调(进入刷新状态后的回调)
-    public var beginRefreshingWithCompletionBlock: (()->())?
+    open var beginRefreshingWithCompletionBlock: (()->())?
     /// 结束刷新的回调
-    public var endRefreshingCompletionBlock: (()->())?
-    public var isRefreshing: Bool {
+    open var endRefreshingCompletionBlock: (()->())?
+    open var isRefreshing: Bool {
         get {
             return self.state == .refreshing || self.state == .willRefresh
         }
@@ -70,15 +70,15 @@ public class MYHRefreshComponent: UIView {
     
     // MARK: 刷新回调
     /// 回调对象
-    public weak var refreshingTarget: AnyObject?
+    open weak var refreshingTarget: AnyObject?
     /// 回调方法
-    public var refreshingAction: Selector?
+    open var refreshingAction: Selector?
     /// 正在刷新的回调
-    public var refreshingBlock: (()->())?
+    open var refreshingBlock: (()->())?
     
     // MARK: 其他
     /// 拉拽的百分比(交给子类重写)
-    public var pullingPercent: CGFloat = 0 {
+    open var pullingPercent: CGFloat = 0 {
         willSet {
             if self.isRefreshing == true {
                 return
@@ -89,7 +89,7 @@ public class MYHRefreshComponent: UIView {
         }
     }
     /// 根据拖拽比例自动切换透明度
-    public var isAutomaticallyChangeAlpha: Bool = false {
+    open var isAutomaticallyChangeAlpha: Bool = false {
         willSet{
             if self.isRefreshing == true {
                 return
@@ -109,12 +109,12 @@ public class MYHRefreshComponent: UIView {
         self.prepare()
     }
         
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         self.placeSubviews()
         super.layoutSubviews()
     }
     
-    public override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         super.draw(rect)
         if self.state == .willRefresh {
             // 预防view还没显示出来就调用了beginRefreshing
@@ -122,7 +122,7 @@ public class MYHRefreshComponent: UIView {
         }
     }
     
-    public override func willMove(toSuperview newSuperview: UIView?) {
+    open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         // 旧的父控件移除监听
         self.removeObservers()
@@ -141,39 +141,39 @@ public class MYHRefreshComponent: UIView {
     }
     // MARK: 交给子类实现的方法
     /// 初始化
-    public func prepare() {
+    open func prepare() {
         self.state = .idle
         self.autoresizingMask = .flexibleWidth
         self.backgroundColor = UIColor.clear
     }
     
     /// 摆放子控件frame
-    public func placeSubviews() {
+    open func placeSubviews() {
         
     }
     
     
     /// 当scrollView的contentOffset发生改变的时候调用
     /// - Parameter change: kvo监听的值
-    public func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
+    open func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
         
     }
     
     /// 当scrollView的contentSize发生改变的时候调用
     /// - Parameter change: kvo监听的值
-    public func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
+    open func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
         
     }
     
     /// 当scrollView的拖拽状态发生改变的时候调用
     /// - Parameter change: kvo监听的值
-    public func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
+    open func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
         
     }
     
     // MARK: 刷新状态控制
     /// 开始刷新
-    public func beginRefreshing() {
+    open func beginRefreshing() {
         UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
             self.alpha = 1
         }
@@ -194,13 +194,13 @@ public class MYHRefreshComponent: UIView {
     
     /// 开始刷新
     /// - Parameter completionBlock: 开始刷新后的回调(进入刷新状态后的回调)
-    public func beginRefreshing(completionBlock: @escaping ()->()) {
+    open func beginRefreshing(completionBlock: @escaping ()->()) {
         self.beginRefreshingWithCompletionBlock = completionBlock
         self.beginRefreshing()
     }
     
     /// 结束刷新
-    public func endRefreshing() {
+    open func endRefreshing() {
         DispatchQueue.main.async { [weak self] () in
             self?.state = .idle
         }
@@ -208,7 +208,7 @@ public class MYHRefreshComponent: UIView {
     
     /// 结束刷新
     /// - Parameter completionBlock: 结束刷新的回调
-    public func endRefreshing(completionBlock: @escaping ()->()) {
+    open func endRefreshing(completionBlock: @escaping ()->()) {
         self.endRefreshingCompletionBlock = completionBlock
         self.endRefreshing()
     }
@@ -242,7 +242,7 @@ extension MYHRefreshComponent {
         self.pan?.addObserver(self, forKeyPath: MYHRefreshKeyPathPanState, options: options, context: nil)
     }
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         guard let keyPath = keyPath else { return }
         // 遇到这些情况就直接返回
@@ -269,7 +269,7 @@ extension MYHRefreshComponent {
 // MARK: 公共方法
 extension MYHRefreshComponent {
     /// 设置回调对象和回调方法
-    public func setRefreshing(target: AnyObject?, refreshingAction: Selector) {
+    open func setRefreshing(target: AnyObject?, refreshingAction: Selector) {
         self.refreshingTarget = target
         self.refreshingAction = refreshingAction
     }
@@ -277,7 +277,7 @@ extension MYHRefreshComponent {
 // MARK: 内部方法
 extension MYHRefreshComponent {
     /// 触发回调（交给子类去调用）
-    public func executeRefreshingCallback() {
+    open func executeRefreshingCallback() {
         DispatchQueue.main.async { [weak self] () in
             guard let strongSelf = self else { return }
             strongSelf.refreshingBlock?()

@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class MYHRefreshHeader: MYHRefreshComponent {
+open class MYHRefreshHeader: MYHRefreshComponent {
     /// 忽略多少scrollView的contentInset的top
-    public var ignoredScrollViewContentInsetTop: CGFloat = 0
+    open var ignoredScrollViewContentInsetTop: CGFloat = 0
     /// 这个key用来存储上一次下拉刷新成功的时间
-    public var lastUpdatedTimeKey: String = MYHRefreshHeaderLastUpdatedTimeKey
+    open var lastUpdatedTimeKey: String = MYHRefreshHeaderLastUpdatedTimeKey
     /// 上一次下拉刷新成功的时间
-    public var lastUpdatedTime: Date?
+    open var lastUpdatedTime: Date?
     
     private var insetTopDelta: CGFloat = 0
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet{
             guard let scrollView = self.superview as? UIScrollView else { return }
             if self.state == newValue {
@@ -69,19 +69,19 @@ public class MYHRefreshHeader: MYHRefreshComponent {
         self.refreshingBlock = refreshingBlock
     }
     
-    override public func prepare() {
+    override open func prepare() {
         super.prepare()
         self.lastUpdatedTimeKey = MYHRefreshHeaderLastUpdatedTimeKey
         self.myh_h = MYHRefreshHeaderHeight
     }
 
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         // 设置y值(当自己的高度发生改变了，肯定要重新调整Y值，所以放到placeSubviews方法中设置y值)
         self.myh_y = -self.myh_h - self.ignoredScrollViewContentInsetTop
     }
     
-    override public func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentOffsetDid: change)
         guard let scrollView = self.superview as? UIScrollView else { return }
         if self.state == .refreshing {
@@ -123,11 +123,11 @@ public class MYHRefreshHeader: MYHRefreshComponent {
         }
     }
     
-    override public func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(panStateDid: change)
     }
     
-    override public func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
+    override open func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentSizeDid: change)
     }
     
@@ -144,7 +144,7 @@ public class MYHRefreshHeader: MYHRefreshComponent {
 // MARK: 公共方法
 extension MYHRefreshHeader {
     /// 获取上次更新成功的时间
-    public func getLastUpdatedTime() -> Date? {
+    open func getLastUpdatedTime() -> Date? {
         return UserDefaults.standard.object(forKey: self.lastUpdatedTimeKey) as? Date
     }
 }

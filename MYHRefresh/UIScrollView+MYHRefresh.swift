@@ -12,7 +12,7 @@ extension NSObject {
     /// 交换实例方法
     /// - Parameter method1: 方法1
     /// - Parameter method2: 方法2
-    public class func exchangeInstance(method1: Selector, method2: Selector) {
+    open class func exchangeInstance(method1: Selector, method2: Selector) {
         if let m1 = class_getInstanceMethod(self, method1), let m2 = class_getInstanceMethod(self, method2) {
             method_exchangeImplementations(m1, m2)
         }
@@ -21,7 +21,7 @@ extension NSObject {
     /// 交换类方法
     /// - Parameter method1: 方法1
     /// - Parameter method2: 方法2
-    public class func exchangeClass(method1: Selector, method2: Selector) {
+    open class func exchangeClass(method1: Selector, method2: Selector) {
         if let m1 = class_getClassMethod(self, method1), let m2 = class_getClassMethod(self, method2) {
             method_exchangeImplementations(m1, m2)
         }
@@ -30,7 +30,7 @@ extension NSObject {
     /// 交换实例方法
     /// - Parameter method1: 方法1
     /// - Parameter method2: 方法2
-    public func exchangeInstance(method1: Selector, method2: Selector) {
+    open func exchangeInstance(method1: Selector, method2: Selector) {
         if let m1 = class_getInstanceMethod(self.classForCoder, method1), let m2 = class_getInstanceMethod(self.classForCoder, method2) {
             method_exchangeImplementations(m1, m2)
         }
@@ -39,7 +39,7 @@ extension NSObject {
     /// 交换类方法
     /// - Parameter method1: 方法1
     /// - Parameter method2: 方法2
-    public func exchangeClass(method1: Selector, method2: Selector) {
+    open func exchangeClass(method1: Selector, method2: Selector) {
         if let m1 = class_getClassMethod(self.classForCoder, method1), let m2 = class_getClassMethod(self.classForCoder, method2) {
             method_exchangeImplementations(m1, m2)
         }
@@ -48,7 +48,7 @@ extension NSObject {
 }
 
 extension UIScrollView {
-    public var myh_header: MYHRefreshHeader? {
+    open var myh_header: MYHRefreshHeader? {
         set {
             
             if newValue != self.myh_header {
@@ -65,7 +65,7 @@ extension UIScrollView {
     }
     
     
-    public var myh_footer: MYHRefreshFooter? {
+    open var myh_footer: MYHRefreshFooter? {
         set {
             
             if newValue != self.myh_footer {
@@ -82,7 +82,7 @@ extension UIScrollView {
         }
     }
     
-    public func myh_totalDataCount() -> Int {
+    open func myh_totalDataCount() -> Int {
         var totalCount = 0
         if let tableView = self as? UITableView {
             for section in 0 ..< tableView.numberOfSections {
@@ -97,7 +97,7 @@ extension UIScrollView {
     }
     
     /// 必须调用exchangeReloadData方法，这个闭包h才会回调
-    public var myh_reloadDataBlock: ((_ totalDataCount: Int)->())? {
+    open var myh_reloadDataBlock: ((_ totalDataCount: Int)->())? {
         set {
             self.willChangeValue(forKey: "myh_reloadDataBlock")
             objc_setAssociatedObject(self, &(MYHRefreshReloadDataBlockKey), newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -108,12 +108,12 @@ extension UIScrollView {
         }
     }
     
-    public func executeReloadDataBlock() {
+    open func executeReloadDataBlock() {
         self.myh_reloadDataBlock?(self.myh_totalDataCount())
     }
 }
 extension UITableView {
-    public func exchangeReloadData() {
+    open func exchangeReloadData() {
         self.exchangeInstance(method1: #selector(self.reloadData), method2: #selector(self.myh_reloadData))
     }
     
@@ -124,7 +124,7 @@ extension UITableView {
 }
 
 extension UICollectionView {
-    public func exchangeReloadData() {
+    open func exchangeReloadData() {
         self.exchangeInstance(method1: #selector(self.reloadData), method2: #selector(self.myh_reloadData))
     }
     

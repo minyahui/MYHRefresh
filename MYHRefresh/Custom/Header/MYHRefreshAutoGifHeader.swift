@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
+open class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
     
-    public weak var gifImageView: UIImageView! {
+    open weak var gifImageView: UIImageView! {
         if self.privateGifImageView == nil {
             let imageView = UIImageView()
             self.addSubview(imageView)
@@ -26,7 +26,7 @@ public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
     private var stateDurations: [MYHRefreshComponent.RefreshState:TimeInterval]? = [MYHRefreshComponent.RefreshState:TimeInterval]()
     
     
-    override public var pullingPercent: CGFloat {
+    override open var pullingPercent: CGFloat {
         willSet{
             super.pullingPercent = newValue
             if self.state != .idle  {
@@ -44,7 +44,7 @@ public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         }
     }
     
-    override public var state: MYHRefreshComponent.RefreshState {
+    override open var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.state == newValue {
                 return
@@ -80,7 +80,7 @@ public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         self.arrowType = arrowType
     }
     
-    override public func placeSubviews() {
+    override open func placeSubviews() {
         super.placeSubviews()
         if self.gifImageView.constraints.count > 0 {
             return
@@ -100,12 +100,12 @@ public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         }
     }
     
-    override public func prepare() {
+    override open func prepare() {
         super.prepare()
         self.labelLeftInset = 20
     }
     
-    public func setImages(images: [UIImage], duration: TimeInterval, state: MYHRefreshComponent.RefreshState) {
+    open func setImages(images: [UIImage], duration: TimeInterval, state: MYHRefreshComponent.RefreshState) {
         self.stateImages?[state] = images
         if duration <= 0 {
             self.stateDurations?[state] = 0.1
@@ -117,7 +117,7 @@ public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         }
     }
     
-    public func setImages(images: [UIImage], state: MYHRefreshComponent.RefreshState) {
+    open func setImages(images: [UIImage], state: MYHRefreshComponent.RefreshState) {
         self.setImages(images: images, duration: Double(images.count) * 0.1, state: state)
     }
 }

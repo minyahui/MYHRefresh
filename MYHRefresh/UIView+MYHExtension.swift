@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-     public var myh_x: CGFloat {
+     open var myh_x: CGFloat {
         get {
             return self.frame.origin.x
         }
@@ -20,7 +20,7 @@ extension UIView {
         }
     }
     
-    public var myh_y: CGFloat {
+    open var myh_y: CGFloat {
         get {
             return self.frame.origin.y
         }
@@ -31,7 +31,7 @@ extension UIView {
         }
     }
     
-    public var myh_w: CGFloat {
+    open var myh_w: CGFloat {
         get {
             return self.frame.size.width
         }
@@ -42,7 +42,7 @@ extension UIView {
         }
     }
     
-    public var myh_h: CGFloat {
+    open var myh_h: CGFloat {
         get {
             return self.frame.size.height
         }
@@ -53,7 +53,7 @@ extension UIView {
         }
     }
     
-    public var myh_size: CGSize {
+    open var myh_size: CGSize {
         get {
             return self.frame.size
         }
@@ -64,7 +64,7 @@ extension UIView {
         }
     }
     
-    public var myh_origin: CGPoint {
+    open var myh_origin: CGPoint {
         get {
             return self.frame.origin
         }
@@ -78,7 +78,7 @@ extension UIView {
     /**
      获取视图所在的控制器(UIViewController)
      */
-    public func myh_getCurrentViewController() -> UIViewController?{
+    open func myh_getCurrentViewController() -> UIViewController?{
         var next: UIView? = self
         repeat{
             if let responder = next?.next{
