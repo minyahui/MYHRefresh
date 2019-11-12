@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "MYHRefresh"
-  spec.version      = "1.0"
+  spec.version      = "1.0.1"
   spec.summary      = "An easy way to use pull-to-refresh base on MJRefresh"
   spec.homepage     = "https://github.com/minyahui/MYHRefresh"
   spec.license      = 'MIT'

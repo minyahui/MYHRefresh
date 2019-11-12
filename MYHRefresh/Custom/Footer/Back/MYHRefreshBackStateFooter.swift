@@ -56,13 +56,13 @@ public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
         
     }
     
-    convenience init(target: AnyObject, refreshingAction: Selector, arrowType: MYHRefreshComponent.ArrowType) {
+    public convenience init(target: AnyObject, refreshingAction: Selector, arrowType: MYHRefreshComponent.ArrowType) {
        self.init()
        self.setRefreshing(target: target, refreshingAction: refreshingAction)
        self.arrowType = arrowType
     }
        
-    convenience init(refreshingBlock: (()->())?, arrowType: MYHRefreshComponent.ArrowType) {
+    public convenience init(refreshingBlock: (()->())?, arrowType: MYHRefreshComponent.ArrowType) {
        self.init()
        self.refreshingBlock = refreshingBlock
        self.arrowType = arrowType
