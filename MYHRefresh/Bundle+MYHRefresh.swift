@@ -27,16 +27,26 @@ extension Bundle {
     /// - Parameter value: <#value description#>
     public static func myh_localizedString(key: String, value: String? = nil) -> String {
         if Bundle.languageBundle == nil {
-            var language = Locale.preferredLanguages.first
+            var language: String? = MYHRefreshDefaultLanguage
+            if language == nil || language!.count == 0 {
+                language = Locale.preferredLanguages.first
+            }
             if let have = language?.hasPrefix("en"), have == true {
                 language = "en"
             } else if let have = language?.hasPrefix("zh"), have == true {
-                
                 if let location = (language as NSString?)?.range(of: "Hans").location, location != NSNotFound {
                     language = "zh-Hans"
                 } else {
                     language = "zh-Hant"
                 }
+            } else if let have = language?.hasPrefix("ko"), have == true {
+                language = "ko"
+            } else if let have = language?.hasPrefix("ru"), have == true {
+                language = "ru"
+            } else if let have = language?.hasPrefix("uk"), have == true {
+                language = "uk"
+            } else {
+                language = "en"
             }
             if let path = Bundle.shared.path(forResource: language, ofType: "lproj") {
                 Bundle.languageBundle = Bundle.init(path: path)

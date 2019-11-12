@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// 语言版本，默认使用系统语言
+let MYHRefreshDefaultLanguage: String = ""
+
 /// 字体大小
 let MYHRefreshLabelFont = UIFont.boldSystemFont(ofSize: 14)
 
