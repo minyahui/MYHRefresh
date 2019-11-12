@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshAutoGifFooter: MYHRefreshAutoStateFooter {
+public class MYHRefreshAutoGifFooter: MYHRefreshAutoStateFooter {
     
     public weak var gifImageView: UIImageView! {
         if self.privateGifImageView == nil {
@@ -25,7 +25,7 @@ class MYHRefreshAutoGifFooter: MYHRefreshAutoStateFooter {
     /// 所有状态对应的动画时间
     private var stateDurations: [MYHRefreshComponent.RefreshState:TimeInterval]? = [MYHRefreshComponent.RefreshState:TimeInterval]()
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if newValue == self.state {
                 return
@@ -52,7 +52,7 @@ class MYHRefreshAutoGifFooter: MYHRefreshAutoStateFooter {
         }
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.gifImageView.constraints.count > 0 {
             return
@@ -66,7 +66,7 @@ class MYHRefreshAutoGifFooter: MYHRefreshAutoStateFooter {
         }
     }
    
-    override func prepare() {
+    override public func prepare() {
         self.labelLeftInset = 20
         super.prepare()
     }

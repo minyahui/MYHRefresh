@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
+public class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
 
     public weak var gifImageView: UIImageView! {
         if self.privateGifImageView == nil {
@@ -25,7 +25,7 @@ class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
     /// 所有状态对应的动画时间
     private var stateDurations: [MYHRefreshComponent.RefreshState:TimeInterval]? = [MYHRefreshComponent.RefreshState:TimeInterval]()
     
-    override var pullingPercent: CGFloat {
+    override public var pullingPercent: CGFloat {
         willSet{
             super.pullingPercent = newValue
             if self.state != .idle  {
@@ -43,7 +43,7 @@ class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
         }
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.state == newValue {
                 return
@@ -71,7 +71,7 @@ class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
     }
     
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.gifImageView.constraints.count > 0 {
             return
@@ -85,7 +85,7 @@ class MYHRefreshBackGifFooter: MYHRefreshBackStateFooter {
         }
     }
     
-    override func prepare() {
+    override public func prepare() {
         // 初始化间距
         self.labelLeftInset = 20
         super.prepare()

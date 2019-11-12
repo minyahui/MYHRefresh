@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class MYHRefreshFooter: MYHRefreshComponent {
+public class MYHRefreshFooter: MYHRefreshComponent {
     /// 忽略多少scrollView的contentInset的bottom
     public var ignoredScrollViewContentInsetBottom: CGFloat = 0
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
+public class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     /// 设置箭头的样式
     public var arrowType: MYHRefreshComponent.ArrowType = .black {
         willSet{
@@ -58,11 +58,11 @@ class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
     private weak var privateStateButton: UIButton?
     
     
-    override func ignoreRefreshAction() -> Bool {
+    override public func ignoreRefreshAction() -> Bool {
         return !self.labelIsTrigger && super.ignoreRefreshAction()
     }
     
-    override func prepare() {
+    override public func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -77,7 +77,7 @@ class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
         super.prepare()
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.constraints.count > 0 {
             return
@@ -98,7 +98,7 @@ class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
        self.arrowType = arrowType
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.isRefreshingTitleHidden, newValue == .refreshing {
                 self.stateLabel.text = ""
@@ -130,7 +130,6 @@ class MYHRefreshAutoStateFooter: MYHRefreshAutoFooter {
 // MARK: 私有方法
 extension MYHRefreshAutoStateFooter {
     @objc private func stateLabelClick() {
-        print("1111")
         if self.state == .idle {
             self.labelIsTrigger = true
             self.beginRefreshing()

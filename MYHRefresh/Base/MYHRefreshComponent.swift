@@ -8,9 +8,7 @@
 
 import UIKit
 
-
-
-open class MYHRefreshComponent: UIView {
+public class MYHRefreshComponent: UIView {
     
     /// 下拉刷新箭头的样式，后面跟着的是图片的名称
     public enum ArrowType: String {
@@ -217,7 +215,6 @@ open class MYHRefreshComponent: UIView {
     
     deinit {
         self.removeObservers()
-        debugPrint(#function,self.classForCoder)
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

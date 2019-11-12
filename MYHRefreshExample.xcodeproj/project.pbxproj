@@ -40,6 +40,7 @@
 		AA57DBF2237A8ECA00EFB62C /* MYHRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57DBDD237A8EC900EFB62C /* MYHRefreshHeader.swift */; };
 		AA57DBF3237A8ECA00EFB62C /* MYHRefreshBackFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57DBDE237A8EC900EFB62C /* MYHRefreshBackFooter.swift */; };
 		AA57DBF4237A8ECA00EFB62C /* MYHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57DBDF237A8EC900EFB62C /* MYHRefreshComponent.swift */; };
+		AA69D850237AAD3F002C93F9 /* MYHRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		AA57DBDD237A8EC900EFB62C /* MYHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshHeader.swift; sourceTree = "<group>"; };
 		AA57DBDE237A8EC900EFB62C /* MYHRefreshBackFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshBackFooter.swift; sourceTree = "<group>"; };
 		AA57DBDF237A8EC900EFB62C /* MYHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshComponent.swift; sourceTree = "<group>"; };
+		AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = MYHRefresh.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				AA57DBB6237A8CD100EFB62C /* DIY */,
 				AA57DBA8237A8C6F00EFB62C /* Assets.xcassets */,
 				AA57DBAA237A8C6F00EFB62C /* LaunchScreen.storyboard */,
+				AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */,
 				AA57DBAD237A8C6F00EFB62C /* Info.plist */,
 			);
 			path = MYHRefreshExample;
@@ -272,6 +275,7 @@
 			files = (
 				AA57DBAC237A8C6F00EFB62C /* LaunchScreen.storyboard in Resources */,
 				AA57DBA9237A8C6F00EFB62C /* Assets.xcassets in Resources */,
+				AA69D850237AAD3F002C93F9 /* MYHRefresh.podspec in Resources */,
 				AA57DBE1237A8ECA00EFB62C /* MYHRefresh.bundle in Resources */,
 				AA57DBA7237A8C6E00EFB62C /* Main.storyboard in Resources */,
 			);

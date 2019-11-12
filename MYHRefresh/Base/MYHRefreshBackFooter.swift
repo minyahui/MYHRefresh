@@ -8,17 +8,17 @@
 
 import UIKit
 
-class MYHRefreshBackFooter: MYHRefreshFooter {
+public class MYHRefreshBackFooter: MYHRefreshFooter {
 
     private var lastBottomDelta: CGFloat = 0
     private var lastRefreshCount: Int = 0
     
-    override func willMove(toSuperview newSuperview: UIView?) {
+    override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         self.scrollView(contentSizeDid: nil)
     }
     
-    override func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
+    override public func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentOffsetDid: change)
         if self.state == .refreshing {
             return
@@ -56,7 +56,7 @@ class MYHRefreshBackFooter: MYHRefreshFooter {
         }
     }
 
-    override func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
+    override public func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentSizeDid: change)
         guard let scrollView = self.scrollView else { return }
         // 内容的高度
@@ -66,7 +66,7 @@ class MYHRefreshBackFooter: MYHRefreshFooter {
         self.myh_y = contentHeight > scrollHeight ? contentHeight : scrollHeight
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if newValue == self.state {
                 return

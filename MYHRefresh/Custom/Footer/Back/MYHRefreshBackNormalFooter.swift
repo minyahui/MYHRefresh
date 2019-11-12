@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
+public class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
     
-    override var arrowType: MYHRefreshComponent.ArrowType {
+    override public var arrowType: MYHRefreshComponent.ArrowType {
         willSet {
             super.arrowType = newValue
             self.arrowImageView.image = Bundle.myh_arrowImage(arrowType: newValue)
@@ -59,7 +59,7 @@ class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
     }
     private weak var privateLoadingView: UIActivityIndicatorView?
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if newValue == self.state {
                 return
@@ -105,7 +105,7 @@ class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
         }
     }
 
-    override func prepare() {
+    override public func prepare() {
         self.arrowType = .black
         if #available(iOS 13.0, *) {
             self.activityIndicatorViewStyle = .medium
@@ -115,7 +115,7 @@ class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
         super.prepare()
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         // 箭头的中心点
         var arrowCenterX = self.myh_w * 0.5

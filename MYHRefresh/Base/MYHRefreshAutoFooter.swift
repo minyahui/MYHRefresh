@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshAutoFooter: MYHRefreshFooter {
+public class MYHRefreshAutoFooter: MYHRefreshFooter {
     /// 当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新)
     public var triggerAutomaticallyRefreshPercent: CGFloat = 1
     /// 是否每一次拖拽只发一次请求
@@ -18,7 +18,7 @@ class MYHRefreshAutoFooter: MYHRefreshFooter {
     
     /// 一个新的拖拽
     private var isOneNewPan: Bool = false
-    override func willMove(toSuperview newSuperview: UIView?) {
+    override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if newSuperview != nil {
             if self.scrollView != nil {
@@ -36,21 +36,21 @@ class MYHRefreshAutoFooter: MYHRefreshFooter {
         }
     }
     
-    override func prepare() {
+    override public func prepare() {
         super.prepare()
         self.triggerAutomaticallyRefreshPercent = 1
         self.isAutomaticallyChangeAlpha = false
         self.isAutomaticallyRefresh = true
     }
     
-    override func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
+    override public func scrollView(contentSizeDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentSizeDid: change)
         if self.scrollView != nil {
             self.myh_y = self.scrollView!.myh_content_height + self.ignoredScrollViewContentInsetBottom
         }
     }
     
-    override func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
+    override public func scrollView(contentOffsetDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(contentOffsetDid: change)
         if self.state != .idle || self.isAutomaticallyRefresh == false || self.myh_y == 0 {
             return
@@ -72,7 +72,7 @@ class MYHRefreshAutoFooter: MYHRefreshFooter {
     }
     
     
-    override func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
+    override public func scrollView(panStateDid change: [NSKeyValueChangeKey : Any]?) {
         super.scrollView(panStateDid: change)
         if self.state != .idle {
             return
@@ -108,14 +108,14 @@ class MYHRefreshAutoFooter: MYHRefreshFooter {
         return !self.isOneNewPan && self.isOnlyRefreshPerDrag
     }
     
-    override func beginRefreshing() {
+    override public func beginRefreshing() {
         if self.ignoreRefreshAction() {
             return
         }
         super.beginRefreshing()
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if newValue == self.state {
                 return
@@ -132,7 +132,7 @@ class MYHRefreshAutoFooter: MYHRefreshFooter {
         }
     }
     
-    override var isHidden: Bool {
+    override public var isHidden: Bool {
         willSet{
             let lastHidden = self.isHidden
             super.isHidden = newValue

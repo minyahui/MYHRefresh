@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
+public class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
     
     public weak var gifImageView: UIImageView! {
         if self.privateGifImageView == nil {
@@ -26,7 +26,7 @@ class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
     private var stateDurations: [MYHRefreshComponent.RefreshState:TimeInterval]? = [MYHRefreshComponent.RefreshState:TimeInterval]()
     
     
-    override var pullingPercent: CGFloat {
+    override public var pullingPercent: CGFloat {
         willSet{
             super.pullingPercent = newValue
             if self.state != .idle  {
@@ -44,7 +44,7 @@ class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         }
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             if self.state == newValue {
                 return
@@ -80,7 +80,7 @@ class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         self.arrowType = arrowType
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.gifImageView.constraints.count > 0 {
             return
@@ -100,7 +100,7 @@ class MYHRefreshAutoGifHeader: MYHRefreshStateHeader {
         }
     }
     
-    override func prepare() {
+    override public func prepare() {
         super.prepare()
         self.labelLeftInset = 20
     }

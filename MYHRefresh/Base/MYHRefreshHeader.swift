@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class MYHRefreshHeader: MYHRefreshComponent {
+public class MYHRefreshHeader: MYHRefreshComponent {
     /// 忽略多少scrollView的contentInset的top
     public var ignoredScrollViewContentInsetTop: CGFloat = 0
     /// 这个key用来存储上一次下拉刷新成功的时间

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshStateHeader: MYHRefreshHeader {
+public class MYHRefreshStateHeader: MYHRefreshHeader {
     // MARK: 刷新时间相关
     /// 显示上一次刷新时间的label
     public weak var lastUpdatedTimeLabel: UILabel! {
@@ -35,7 +35,7 @@ class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     private weak var privateStateLabel: UILabel?
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet{
             // 设置状态文字
             self.stateLabel.text = self.stateTitles[newValue]
@@ -70,7 +70,7 @@ class MYHRefreshStateHeader: MYHRefreshHeader {
     /// 所有状态对应的文字
     private var stateTitles: [MYHRefreshComponent.RefreshState:String] = [MYHRefreshComponent.RefreshState:String]()
     
-    override var lastUpdatedTimeKey: String {
+    override public var lastUpdatedTimeKey: String {
         didSet{
             self.refreshTime()
         }
@@ -89,7 +89,7 @@ class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     
     // MARK: 重写父类的方法
-    override func prepare() {
+    override public func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -98,7 +98,7 @@ class MYHRefreshStateHeader: MYHRefreshHeader {
         self.setTitle(Bundle.myh_localizedString(key: MYHRefreshHeaderIdleText), state: .idle)
         super.prepare()
     }
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.isHidden == true {
             return

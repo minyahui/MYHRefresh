@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
-    override var arrowType: MYHRefreshComponent.ArrowType {
+public class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
+    override public var arrowType: MYHRefreshComponent.ArrowType {
         willSet {
             super.arrowType = newValue
             switch newValue {
@@ -45,7 +45,7 @@ class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
         }
     }
 
-    override func prepare() {
+    override public func prepare() {
         super.prepare()
         if #available(iOS 13.0, *) {
             self.activityIndicatorViewStyle = .medium
@@ -54,7 +54,7 @@ class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
         }
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.loadingView.constraints.count > 0 {
             return
@@ -67,7 +67,7 @@ class MYHRefreshAutoNormalFooter: MYHRefreshAutoStateFooter {
         self.loadingView.center = CGPoint.init(x: loadingCenterX, y: loadingCenterY)
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet{
             if newValue == self.state {
                 return

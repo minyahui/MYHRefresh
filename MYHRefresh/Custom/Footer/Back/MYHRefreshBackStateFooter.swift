@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
+public class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     
     /// 设置箭头的样式
     public var arrowType: MYHRefreshComponent.ArrowType = .black {
@@ -43,7 +43,7 @@ class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     private weak var privateStateLabel: UILabel?
     
     
-    override func prepare() {
+    override public func prepare() {
         // 初始化间距
         self.labelLeftInset = MYHRefreshLabelLeftInset
         // 初始化文字
@@ -68,7 +68,7 @@ class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
        self.arrowType = arrowType
     }
     
-    override func placeSubviews() {
+    override public func placeSubviews() {
         super.placeSubviews()
         if self.stateLabel.constraints.count > 0 {
             return
@@ -76,7 +76,7 @@ class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
         self.stateLabel.frame = self.bounds
     }
     
-    override var state: MYHRefreshComponent.RefreshState {
+    override public var state: MYHRefreshComponent.RefreshState {
         willSet {
             self.stateLabel.text = self.stateTitles[newValue]
             if self.state == newValue {
