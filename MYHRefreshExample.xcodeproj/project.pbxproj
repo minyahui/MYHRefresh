@@ -41,6 +41,7 @@
 		AA57DBF3237A8ECA00EFB62C /* MYHRefreshBackFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57DBDE237A8EC900EFB62C /* MYHRefreshBackFooter.swift */; };
 		AA57DBF4237A8ECA00EFB62C /* MYHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57DBDF237A8EC900EFB62C /* MYHRefreshComponent.swift */; };
 		AA69D850237AAD3F002C93F9 /* MYHRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */; };
+		AAF62D1A237B92A5006F3EB6 /* ExampleViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF62D19237B92A5006F3EB6 /* ExampleViewController1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +80,8 @@
 		AA57DBDD237A8EC900EFB62C /* MYHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshHeader.swift; sourceTree = "<group>"; };
 		AA57DBDE237A8EC900EFB62C /* MYHRefreshBackFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshBackFooter.swift; sourceTree = "<group>"; };
 		AA57DBDF237A8EC900EFB62C /* MYHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYHRefreshComponent.swift; sourceTree = "<group>"; };
-		AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = MYHRefresh.podspec; sourceTree = SOURCE_ROOT; };
+		AA69D84F237AAD3F002C93F9 /* MYHRefresh.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MYHRefresh.podspec; sourceTree = SOURCE_ROOT; };
+		AAF62D19237B92A5006F3EB6 /* ExampleViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				AA57DB9F237A8C6E00EFB62C /* AppDelegate.swift */,
 				AA57DBA3237A8C6E00EFB62C /* ViewController.swift */,
 				AA57DBB3237A8CC300EFB62C /* ExampleViewController.swift */,
+				AAF62D19237B92A5006F3EB6 /* ExampleViewController1.swift */,
 				AA57DBB5237A8CD100EFB62C /* ExampleModel.swift */,
 				AA57DBA5237A8C6E00EFB62C /* Main.storyboard */,
 				AA57DBC4237A8EC900EFB62C /* MYHRefresh */,
@@ -307,6 +310,7 @@
 				AA57DBC0237A8CD100EFB62C /* MYHRefreshDIYAutoFooter.swift in Sources */,
 				AA57DBEB237A8ECA00EFB62C /* MYHRefreshAutoGifHeader.swift in Sources */,
 				AA57DBEA237A8ECA00EFB62C /* MYHRefreshAutoStateFooter.swift in Sources */,
+				AAF62D1A237B92A5006F3EB6 /* ExampleViewController1.swift in Sources */,
 				AA57DBE0237A8ECA00EFB62C /* UIView+MYHExtension.swift in Sources */,
 				AA57DBF2237A8ECA00EFB62C /* MYHRefreshHeader.swift in Sources */,
 				AA57DBE6237A8ECA00EFB62C /* MYHRefreshBackGifFooter.swift in Sources */,

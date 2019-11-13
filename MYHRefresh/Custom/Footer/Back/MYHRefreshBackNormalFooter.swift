@@ -70,7 +70,7 @@ open class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
             if newValue == .idle {
                 if oldValue == .refreshing {
                     self.arrowImageView.transform = CGAffineTransform.init(rotationAngle: -CGFloat.pi)
-                    UIView.animate(withDuration: MYHRefreshSlowAnimationDuration, animations: {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshSlowAnimationDuration, animations: {
                         self.loadingView.alpha = 0
                     }) { (finish) in
                         // 防止动画结束后，状态已经不是MJRefreshStateIdle
@@ -84,7 +84,7 @@ open class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
                 } else {
                     self.arrowImageView.isHidden = false
                     self.loadingView.stopAnimating()
-                    UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration) {
                         self.arrowImageView.transform = CGAffineTransform.init(rotationAngle: -CGFloat.pi)
                     }
                 }
@@ -92,7 +92,7 @@ open class MYHRefreshBackNormalFooter: MYHRefreshBackStateFooter {
             } else if newValue == .pulling {
                 self.arrowImageView.isHidden = false
                 self.loadingView.stopAnimating()
-                UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
+                UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration) {
                     self.arrowImageView.transform = CGAffineTransform.identity
                 }
             } else if newValue == .refreshing {

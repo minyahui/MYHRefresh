@@ -79,7 +79,7 @@ open class MYHRefreshBackFooter: MYHRefreshFooter {
             if newValue == .noMoreData || newValue == .idle {
                 // 刷新完毕
                 if oldValue == .refreshing {
-                    UIView.animate(withDuration: MYHRefreshSlowAnimationDuration, animations: {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshSlowAnimationDuration, animations: {
                         self.scrollView!.myh_inset_bottom -= self.lastBottomDelta
                         self.endRefreshingCompletionBlock?()
                         // 自动调整透明度
@@ -98,7 +98,7 @@ open class MYHRefreshBackFooter: MYHRefreshFooter {
                 }
             } else if newValue == .refreshing {
                 self.lastRefreshCount = scrollView.myh_totalDataCount()
-                UIView.animate(withDuration: MYHRefreshFastAnimationDuration, animations: {
+                UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration, animations: {
                     var bottom = self.myh_h + (self.scrollViewOriginalInset?.bottom ?? 0)
                     let deltaH = self.heightForContentBreakView()
                     if deltaH < 0 {// 如果内容高度小于view的高度

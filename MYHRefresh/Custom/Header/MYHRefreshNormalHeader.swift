@@ -34,8 +34,8 @@ open class MYHRefreshNormalHeader: MYHRefreshStateHeader {
     }
     private weak var privateLoadingView: UIActivityIndicatorView?
     
-    override open var arrowType: MYHRefreshComponent.ArrowType{
-        willSet{
+    open override var arrowType: MYHRefreshComponent.ArrowType {
+        willSet {
             super.arrowType = newValue
             self.arrowImageView.image = Bundle.myh_arrowImage(arrowType: newValue)
             switch newValue {
@@ -68,7 +68,7 @@ open class MYHRefreshNormalHeader: MYHRefreshStateHeader {
             if newValue == .idle {
                 if oldValue == .refreshing {
                     self.arrowImageView.transform = CGAffineTransform.identity
-                    UIView.animate(withDuration: MYHRefreshSlowAnimationDuration, animations: {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshSlowAnimationDuration, animations: {
                         self.loadingView.alpha = 0
                     }) { (finish) in
                         if oldValue != .idle {
@@ -82,16 +82,15 @@ open class MYHRefreshNormalHeader: MYHRefreshStateHeader {
                     self.loadingView.stopAnimating()
                     self.arrowImageView.isHidden = false
                     
-                    UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration) {
                         self.arrowImageView.transform = CGAffineTransform.identity
                     }
                 }
             } else if newValue == .pulling {
                 self.loadingView.stopAnimating()
                 self.arrowImageView.isHidden = false
-                UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
+                UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration) {
                     self.arrowImageView.transform = CGAffineTransform.init(rotationAngle: -CGFloat.pi)
-//                        CATransform3DGetAffineTransform(CATransform3DMakeRotation(-CGFloat.pi, 0, 1, 0))
                 }
             } else if newValue == .refreshing {
                 self.loadingView.alpha = 1 // 防止refreshing -> idle的动画完毕动作没有被执行
@@ -137,5 +136,11 @@ open class MYHRefreshNormalHeader: MYHRefreshStateHeader {
             self.activityIndicatorViewStyle = .gray
         }
         super.prepare()
+    }
+    
+    open override func modeChange() {
+        super.modeChange()
+        let arrowType = self.arrowType
+        self.arrowType = arrowType
     }
 }

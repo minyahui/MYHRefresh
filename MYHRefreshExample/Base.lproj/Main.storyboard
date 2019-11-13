@@ -60,6 +60,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="首页" id="Nmd-JN-drI">
+                        <barButtonItem key="leftBarButtonItem" title="不遵循暗黑模式" id="DZJ-0z-btI">
+                            <connections>
+                                <segue destination="2JV-EF-5Sg" kind="show" id="wcT-9a-5zF"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="停止" id="AWT-gV-iQH">
                                 <connections>
@@ -95,7 +100,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h2E-ND-ecJ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" red="0.10980392160000001" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -127,6 +132,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xrx-Lb-y2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1206" y="463"/>
+        </scene>
+        <!--不遵循暗黑模式-->
+        <scene sceneID="UtB-yj-DQM">
+            <objects>
+                <viewController id="2JV-EF-5Sg" customClass="ExampleViewController1" customModule="MYHRefreshExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xuW-V7-KH9"/>
+                        <viewControllerLayoutGuide type="bottom" id="cv4-qG-cnW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u1j-F1-Hhy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tal-7v-V8o">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cv4-qG-cnW" firstAttribute="top" secondItem="tal-7v-V8o" secondAttribute="bottom" id="28v-vU-hVQ"/>
+                            <constraint firstAttribute="trailing" secondItem="tal-7v-V8o" secondAttribute="trailing" id="FnQ-Ze-Waf"/>
+                            <constraint firstItem="tal-7v-V8o" firstAttribute="leading" secondItem="u1j-F1-Hhy" secondAttribute="leading" id="LwW-6Z-DhD"/>
+                            <constraint firstItem="tal-7v-V8o" firstAttribute="top" secondItem="xuW-V7-KH9" secondAttribute="bottom" id="aX2-5R-NWB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="不遵循暗黑模式" id="Ie9-d7-Pmj"/>
+                    <connections>
+                        <outlet property="tableView" destination="tal-7v-V8o" id="OLq-R1-Ee1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Orv-74-p8T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674" y="1131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bhv-CH-fBP">

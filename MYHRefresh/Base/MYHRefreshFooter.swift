@@ -28,7 +28,7 @@ open class MYHRefreshFooter: MYHRefreshComponent {
     
     override open func prepare() {
         super.prepare()
-        self.myh_h = MYHRefreshFooterHeight
+        self.myh_h = MYHRefreshConst.shared.MYHRefreshFooterHeight
     }
     
     override init(frame: CGRect) {

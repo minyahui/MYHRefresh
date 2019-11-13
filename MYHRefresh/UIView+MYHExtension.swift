@@ -98,7 +98,7 @@ extension UIView {
 extension UILabel {
     public static func myh_init() -> UILabel {
         let label = UILabel.init()
-        label.font = MYHRefreshLabelFont
+        label.font = MYHRefreshConst.shared.MYHRefreshLabelFont
         label.textColor = UIColor.myh_black
         label.autoresizingMask = .flexibleWidth
         label.textAlignment = .center
@@ -120,33 +120,19 @@ extension UILabel {
 extension UIColor {
     open class var myh_black: UIColor {
         get {
-            var color = UIColor.black
-            if #available(iOS 13.0, *) {
-               color = UIColor.init { (trait) -> UIColor in
-                    if trait.userInterfaceStyle != .light {
-                        return UIColor.white
-                    } else {
-                        return UIColor.black
-                    }
-                }
+            if MYHRefreshConst.shared.isDark {
+                return UIColor.white
             }
-            return color
+            return UIColor.black
         }
     }
 
     open class var myh_white: UIColor {
         get {
-            var color = UIColor.white
-            if #available(iOS 13.0, *) {
-               color = UIColor.init { (trait) -> UIColor in
-                    if trait.userInterfaceStyle != .light {
-                        return UIColor.black
-                    } else {
-                        return UIColor.white
-                    }
-                }
+            if MYHRefreshConst.shared.isDark {
+                return UIColor.black
             }
-            return color
+            return UIColor.white
         }
     }
 

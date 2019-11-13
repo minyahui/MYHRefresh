@@ -25,7 +25,7 @@ open class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     }
     
     /// 文字距离圈圈、箭头的距离
-    open var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
+    open var labelLeftInset: CGFloat = MYHRefreshConst.shared.MYHRefreshLabelLeftInset
         
     /// 所有状态对应的文字
     private var stateTitles: [MYHRefreshComponent.RefreshState:String] = [MYHRefreshComponent.RefreshState:String]()
@@ -45,12 +45,12 @@ open class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
     
     override open func prepare() {
         // 初始化间距
-        self.labelLeftInset = MYHRefreshLabelLeftInset
+        self.labelLeftInset = MYHRefreshConst.shared.MYHRefreshLabelLeftInset
         // 初始化文字
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshBackFooterPullingText), state: .pulling)
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshBackFooterRefreshingText), state: .refreshing)
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshBackFooterNoMoreDataText), state: .noMoreData)
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshBackFooterIdleText), state: .idle)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshBackFooterPullingText), state: .pulling)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshBackFooterRefreshingText), state: .refreshing)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshBackFooterNoMoreDataText), state: .noMoreData)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshBackFooterIdleText), state: .idle)
         self.arrowType = .black
         super.prepare()
         
@@ -66,6 +66,32 @@ open class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
        self.init()
        self.refreshingBlock = refreshingBlock
        self.arrowType = arrowType
+    }
+    
+    public convenience init(target: AnyObject, refreshingAction: Selector, arrowType: MYHRefreshComponent.ArrowType, isFollowDrakMode: Bool) {
+        self.init()
+        self.setRefreshing(target: target, refreshingAction: refreshingAction)
+        self.arrowType = arrowType
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+       
+    public convenience init(refreshingBlock: (()->())?, arrowType: MYHRefreshComponent.ArrowType, isFollowDrakMode: Bool) {
+        self.init()
+        self.refreshingBlock = refreshingBlock
+        self.arrowType = arrowType
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+    
+    public convenience init(target: AnyObject, refreshingAction: Selector, isFollowDrakMode: Bool) {
+        self.init()
+        self.setRefreshing(target: target, refreshingAction: refreshingAction)
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+       
+    public convenience init(refreshingBlock: (()->())?, isFollowDrakMode: Bool) {
+        self.init()
+        self.refreshingBlock = refreshingBlock
+        self.isFollowDrakMode = isFollowDrakMode
     }
     
     override open func placeSubviews() {
@@ -102,10 +128,11 @@ open class MYHRefreshBackStateFooter: MYHRefreshBackFooter {
         return self.stateTitles[state]
     }
     
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
+    open override func modeChange() {
+        super.modeChange()
         let arrow = self.arrowType
         self.arrowType = arrow
     }
+    
 }
 

@@ -27,7 +27,7 @@ extension Bundle {
     /// - Parameter value: <#value description#>
     public static func myh_localizedString(key: String, value: String? = nil) -> String {
         if Bundle.languageBundle == nil {
-            var language: String? = MYHRefreshDefaultLanguage
+            var language: String? = MYHRefreshConst.shared.MYHRefreshDefaultLanguage
             if language == nil || language!.count == 0 {
                 language = Locale.preferredLanguages.first
             }
@@ -65,23 +65,13 @@ extension Bundle {
         var imageName: String = arrowType.rawValue
         switch arrowType {
         case .black:
-            if #available(iOS 13.0, *) {
-               _ = UIColor.init { (trait) -> UIColor in
-                    if trait.userInterfaceStyle != .light {
-                        imageName = "MYH_arrow_white@2x"
-                    }
-                    return UIColor.black
-                }
+            if MYHRefreshConst.shared.isDark {
+                imageName = "MYH_arrow_white@2x"
             }
             break
         case .white:
-            if #available(iOS 13.0, *) {
-               _ = UIColor.init { (trait) -> UIColor in
-                    if trait.userInterfaceStyle != .light {
-                        imageName = "MYH_arrow_black@2x"
-                    }
-                    return UIColor.black
-                }
+            if MYHRefreshConst.shared.isDark {
+                imageName = "MYH_arrow_black@2x"
             }
             break
         }

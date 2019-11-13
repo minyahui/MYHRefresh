@@ -12,7 +12,7 @@ open class MYHRefreshHeader: MYHRefreshComponent {
     /// 忽略多少scrollView的contentInset的top
     open var ignoredScrollViewContentInsetTop: CGFloat = 0
     /// 这个key用来存储上一次下拉刷新成功的时间
-    open var lastUpdatedTimeKey: String = MYHRefreshHeaderLastUpdatedTimeKey
+    open var lastUpdatedTimeKey: String = MYHRefreshConst.shared.MYHRefreshHeaderLastUpdatedTimeKey
     /// 上一次下拉刷新成功的时间
     open var lastUpdatedTime: Date?
     
@@ -32,7 +32,7 @@ open class MYHRefreshHeader: MYHRefreshComponent {
                 UserDefaults.standard.set(Date.init(), forKey: self.lastUpdatedTimeKey)
                 UserDefaults.standard.synchronize()
                 
-                UIView.animate(withDuration: MYHRefreshSlowAnimationDuration, animations: {
+                UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshSlowAnimationDuration, animations: {
                     scrollView.myh_inset_top += self.insetTopDelta
                     if self.isAutomaticallyChangeAlpha {
                         self.alpha = 0
@@ -44,7 +44,7 @@ open class MYHRefreshHeader: MYHRefreshComponent {
             } else if newValue == .refreshing {
                 DispatchQueue.main.async { [weak self] () in
                     guard let strongSelf = self else { return }
-                    UIView.animate(withDuration: MYHRefreshFastAnimationDuration, animations: {
+                    UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration, animations: {
                         let top = (strongSelf.scrollViewOriginalInset?.top ?? 0) + strongSelf.myh_h
                         scrollView.myh_inset_top = top
                         var offset = scrollView.contentOffset
@@ -71,8 +71,8 @@ open class MYHRefreshHeader: MYHRefreshComponent {
     
     override open func prepare() {
         super.prepare()
-        self.lastUpdatedTimeKey = MYHRefreshHeaderLastUpdatedTimeKey
-        self.myh_h = MYHRefreshHeaderHeight
+        self.lastUpdatedTimeKey = MYHRefreshConst.shared.MYHRefreshHeaderLastUpdatedTimeKey
+        self.myh_h = MYHRefreshConst.shared.MYHRefreshHeaderHeight
     }
 
     override open func placeSubviews() {

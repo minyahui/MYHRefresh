@@ -132,23 +132,22 @@ extension ExampleViewController {
             let header = MYHRefreshStateHeader.init(refreshingBlock: { [weak self] () in
                 self?.loadHeaderData()
             })
-            header.arrowType = .white
             self.tableView.myh_header = header
             break
         case .normal:
-            self.tableView.myh_header = MYHRefreshNormalHeader.init(target: self, refreshingAction: #selector(self.loadHeaderData), arrowType: .white)
+            self.tableView.myh_header = MYHRefreshNormalHeader.init(target: self, refreshingAction: #selector(self.loadHeaderData))
             break
         case .gif:
             /// 这个建议继承，重写prepare方法
             let header = MYHRefreshDIYAutoGifHeader.init(refreshingBlock: { [weak self] () in
                 self?.loadHeaderData()
-            }, arrowType: .white)
+            })
             self.tableView.myh_header = header
             break
         case .hiddenTime:
             let header = MYHRefreshNormalHeader.init(refreshingBlock: { [weak self] () in
                 self?.loadHeaderData()
-            }, arrowType: .white)
+            })
             header.lastUpdatedTimeLabel.isHidden = true
             header.isAutomaticallyChangeAlpha = true
             self.tableView.myh_header = header
@@ -156,7 +155,7 @@ extension ExampleViewController {
         case .hiddenStateTime:
             let header = MYHRefreshNormalHeader.init(refreshingBlock: { [weak self] () in
                 self?.loadHeaderData()
-            }, arrowType: .white)
+            })
             header.lastUpdatedTimeLabel.isHidden = true
             header.stateLabel.isHidden = true
             self.tableView.myh_header = header
@@ -164,7 +163,7 @@ extension ExampleViewController {
         case .customTitle:
             let header = MYHRefreshNormalHeader.init(refreshingBlock: { [weak self] () in
                 self?.loadHeaderData()
-            }, arrowType: .white)
+            })
             header.setTitle("自定义-下拉刷新", state: .idle)
             header.setTitle("自定义-释放就能刷新", state: .pulling)
             header.setTitle("自定义-加载中", state: .refreshing)
@@ -186,7 +185,6 @@ extension ExampleViewController {
             let footer = MYHRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] () in
                 self?.loadMoreData()
             })
-            footer.arrowType = .white
             self.tableView.myh_footer = footer
             break
         case .gif:
@@ -229,7 +227,7 @@ extension ExampleViewController {
             }
             break
         case .auto1:
-            self.tableView.myh_footer = MYHRefreshBackNormalFooter.init(target: self, refreshingAction: #selector(self.loadMoreData), arrowType: .white)
+            self.tableView.myh_footer = MYHRefreshBackNormalFooter.init(target: self, refreshingAction: #selector(self.loadMoreData), arrowType: .black)
             self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 30, right: 0)
             self.tableView.myh_footer?.ignoredScrollViewContentInsetBottom = 30
             break

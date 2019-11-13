@@ -51,7 +51,7 @@ open class MYHRefreshStateHeader: MYHRefreshHeader {
     
     /// 设置箭头的样式
     open var arrowType: MYHRefreshComponent.ArrowType = .black {
-        willSet{
+        willSet {
             switch newValue {
             case .black:
                 self.stateLabel.textColor = UIColor.myh_black
@@ -64,8 +64,9 @@ open class MYHRefreshStateHeader: MYHRefreshHeader {
             }
         }
     }
+    
     /// 文字距离圈圈、箭头的距离
-    open var labelLeftInset: CGFloat = MYHRefreshLabelLeftInset
+    open var labelLeftInset: CGFloat = MYHRefreshConst.shared.MYHRefreshLabelLeftInset
     
     /// 所有状态对应的文字
     private var stateTitles: [MYHRefreshComponent.RefreshState:String] = [MYHRefreshComponent.RefreshState:String]()
@@ -77,25 +78,51 @@ open class MYHRefreshStateHeader: MYHRefreshHeader {
     }
     
     public convenience init(target: AnyObject, refreshingAction: Selector, arrowType: MYHRefreshComponent.ArrowType) {
-       self.init()
-       self.setRefreshing(target: target, refreshingAction: refreshingAction)
-       self.arrowType = arrowType
+        self.init()
+        self.setRefreshing(target: target, refreshingAction: refreshingAction)
+        self.arrowType = arrowType
     }
        
     public convenience init(refreshingBlock: (()->())?, arrowType: MYHRefreshComponent.ArrowType) {
-       self.init()
-       self.refreshingBlock = refreshingBlock
-       self.arrowType = arrowType
+        self.init()
+        self.refreshingBlock = refreshingBlock
+        self.arrowType = arrowType
+    }
+    
+    public convenience init(target: AnyObject, refreshingAction: Selector, arrowType: MYHRefreshComponent.ArrowType, isFollowDrakMode: Bool) {
+        self.init()
+        self.setRefreshing(target: target, refreshingAction: refreshingAction)
+        self.arrowType = arrowType
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+       
+    public convenience init(refreshingBlock: (()->())?, arrowType: MYHRefreshComponent.ArrowType, isFollowDrakMode: Bool) {
+        self.init()
+        self.refreshingBlock = refreshingBlock
+        self.arrowType = arrowType
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+    
+    public convenience init(target: AnyObject, refreshingAction: Selector, isFollowDrakMode: Bool) {
+        self.init()
+        self.setRefreshing(target: target, refreshingAction: refreshingAction)
+        self.isFollowDrakMode = isFollowDrakMode
+    }
+       
+    public convenience init(refreshingBlock: (()->())?, isFollowDrakMode: Bool) {
+        self.init()
+        self.refreshingBlock = refreshingBlock
+        self.isFollowDrakMode = isFollowDrakMode
     }
     
     // MARK: 重写父类的方法
     override open func prepare() {
         // 初始化间距
-        self.labelLeftInset = MYHRefreshLabelLeftInset
+        self.labelLeftInset = MYHRefreshConst.shared.MYHRefreshLabelLeftInset
         // 初始化文字
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshHeaderPullingText), state: .pulling)
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshHeaderRefreshingText), state: .refreshing)
-        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshHeaderIdleText), state: .idle)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderPullingText), state: .pulling)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderRefreshingText), state: .refreshing)
+        self.setTitle(Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderIdleText), state: .idle)
         super.prepare()
     }
     override open func placeSubviews() {
@@ -129,10 +156,10 @@ open class MYHRefreshStateHeader: MYHRefreshHeader {
         self.stateLabel.text = self.stateTitles[state]
     }
     
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        let arrow = self.arrowType
-        self.arrowType = arrow
+    open override func modeChange() {
+        super.modeChange()
+        let arrowType = self.arrowType
+        self.arrowType = arrowType
     }
 }
 
@@ -145,7 +172,7 @@ extension MYHRefreshStateHeader{
             return
         }
         guard let lastUpdatedTime = UserDefaults.standard.object(forKey: self.lastUpdatedTimeKey) as? Date else {
-            self.lastUpdatedTimeLabel.text = Bundle.myh_localizedString(key: MYHRefreshHeaderLastTimeText) + Bundle.myh_localizedString(key: MYHRefreshHeaderNoneLastDateText)
+            self.lastUpdatedTimeLabel.text = Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderLastTimeText) + Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderNoneLastDateText)
             return
         }
         if let timeStr = self.lastUpdatedTimeText?(lastUpdatedTime) {
@@ -170,7 +197,7 @@ extension MYHRefreshStateHeader{
             formatter.dateFormat = "yyyy-MM-dd HH:mm"
         }
         let time = formatter.string(from: lastUpdatedTime)
-        self.lastUpdatedTimeLabel.text = Bundle.myh_localizedString(key: MYHRefreshHeaderLastTimeText) + (isToday ? Bundle.myh_localizedString(key: MYHRefreshHeaderDateTodayText) : "") + time
+        self.lastUpdatedTimeLabel.text = Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderLastTimeText) + (isToday ? Bundle.myh_localizedString(key: MYHRefreshConst.shared.MYHRefreshHeaderDateTodayText) : "") + time
     }
     
     

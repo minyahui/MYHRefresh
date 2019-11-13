@@ -32,6 +32,18 @@ open class MYHRefreshComponent: UIView {
         case noMoreData
     }
     
+    /// 是否支持暗黑模式-支持单个页面修改，默认支持
+    open var isFollowDrakMode: Bool = true {
+        willSet {
+            if newValue == self.isFollowDrakMode {
+                return
+            }
+        }
+        didSet {
+            self.modeChange()
+        }
+    }
+    
     /// 刷新状态 一般交给子类内部实现
     open var state: RefreshState = .none {
         didSet{
@@ -106,6 +118,16 @@ open class MYHRefreshComponent: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                MYHRefreshConst.shared.isDark = true
+            } else {
+                MYHRefreshConst.shared.isDark = false
+            }
+        } else {
+            MYHRefreshConst.shared.isDark = false
+        }
+        self.modeChange()
         self.prepare()
     }
         
@@ -152,6 +174,12 @@ open class MYHRefreshComponent: UIView {
         
     }
     
+    /// 当暗黑模式切换的时候调用
+    open func modeChange() {
+        if !self.isFollowDrakMode {
+            MYHRefreshConst.shared.isDark = false
+        }
+    }
     
     /// 当scrollView的contentOffset发生改变的时候调用
     /// - Parameter change: kvo监听的值
@@ -174,7 +202,7 @@ open class MYHRefreshComponent: UIView {
     // MARK: 刷新状态控制
     /// 开始刷新
     open func beginRefreshing() {
-        UIView.animate(withDuration: MYHRefreshFastAnimationDuration) {
+        UIView.animate(withDuration: MYHRefreshConst.shared.MYHRefreshFastAnimationDuration) {
             self.alpha = 1
         }
         
@@ -215,11 +243,24 @@ open class MYHRefreshComponent: UIView {
     
     deinit {
         self.removeObservers()
+        debugPrint(self.classForCoder, #function)
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                MYHRefreshConst.shared.isDark = true
+            } else {
+                MYHRefreshConst.shared.isDark = false
+            }
+        } else {
+            MYHRefreshConst.shared.isDark = false
+        }
+        self.modeChange()
     }
+    
+    
 }
 // MARK: KVO监听
 extension MYHRefreshComponent {
@@ -227,19 +268,19 @@ extension MYHRefreshComponent {
         if self.pan == nil {
             return
         }
-        self.superview?.removeObserver(self, forKeyPath: MYHRefreshKeyPathContentOffset)
-        self.superview?.removeObserver(self, forKeyPath: MYHRefreshKeyPathContentSize)
-        self.pan?.removeObserver(self, forKeyPath: MYHRefreshKeyPathPanState)
+        self.superview?.removeObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathContentOffset)
+        self.superview?.removeObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathContentSize)
+        self.pan?.removeObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathPanState)
         self.pan = nil
     }
     
     private func addObservers() {
         
         let options: NSKeyValueObservingOptions = [NSKeyValueObservingOptions.new, NSKeyValueObservingOptions.old]
-        self.scrollView?.addObserver(self, forKeyPath: MYHRefreshKeyPathContentOffset, options: options, context: nil)
-        self.scrollView?.addObserver(self, forKeyPath: MYHRefreshKeyPathContentSize, options: options, context: nil)
+        self.scrollView?.addObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathContentOffset, options: options, context: nil)
+        self.scrollView?.addObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathContentSize, options: options, context: nil)
         self.pan = self.scrollView?.panGestureRecognizer
-        self.pan?.addObserver(self, forKeyPath: MYHRefreshKeyPathPanState, options: options, context: nil)
+        self.pan?.addObserver(self, forKeyPath: MYHRefreshConst.shared.MYHRefreshKeyPathPanState, options: options, context: nil)
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -251,7 +292,7 @@ extension MYHRefreshComponent {
         }
         
         // 这个就算看不见也需要处理
-        if keyPath == MYHRefreshKeyPathContentSize {
+        if keyPath == MYHRefreshConst.shared.MYHRefreshKeyPathContentSize {
             self.scrollView(contentSizeDid: change)
         }
         
@@ -259,9 +300,9 @@ extension MYHRefreshComponent {
         if self.isHidden == true {
             return
         }
-        if keyPath == MYHRefreshKeyPathContentOffset {
+        if keyPath == MYHRefreshConst.shared.MYHRefreshKeyPathContentOffset {
             self.scrollView(contentOffsetDid: change)
-        } else if keyPath == MYHRefreshKeyPathPanState {
+        } else if keyPath == MYHRefreshConst.shared.MYHRefreshKeyPathPanState {
             self.scrollView(panStateDid: change)
         }
     }
